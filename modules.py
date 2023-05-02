@@ -11,31 +11,31 @@ def calBmi(weight, height):
     bmi = weight/((height/100)**2) 
     print("Your body mass index is: ", round(bmi,2))
     if ( bmi < 16):
-        print("Acoording to your BMI, you are Severely Underweight")
+        val = "Acoording to your BMI, you are Severely Underweight"
         bfbmi=2
         lbmi=2
         dbmi=3
     elif ( bmi >= 16 and bmi < 18.5):
-        print("Acoording to your BMI, you are Underweight")
+        val = "Acoording to your BMI, you are Underweight"
         bfbmi=4
         lbmi=0
         dbmi=2
     elif ( bmi >= 18.5 and bmi < 25):
-        print("Acoording to your BMI, you are Healthy")
+        val = "Acoording to your BMI, you are Healthy"
         bfbmi=3
         lbmi=3
         dbmi=0
     elif ( bmi >= 25 and bmi < 30):
-        print("Acoording to your BMI, you are Overweight")
+        val = "Acoording to your BMI, you are Overweight"
         bfbmi=1
         lbmi=4
         dbmi=4
     elif ( bmi >=30):
-        print("Acoording to your BMI, you are Severely Overweight")
+        val = "Acoording to your BMI, you are Severely Overweight"
         bfbmi=0
         lbmi=1
         dbmi=1
-    return bfbmi, lbmi, dbmi
+    return bfbmi, lbmi, dbmi,val
 
 def clusterKmeans(catdata):
     ## K-Means
@@ -168,15 +168,21 @@ def recommend(w, h):
     bf_df = pd.read_csv('data/breakfast.csv')
     l_df = pd.read_csv('data/lunch.csv')
     d_df = pd.read_csv('data/dinner.csv')
-    bfbmi, lbmi, dbmi = calBmi(int(w), int(h))
+    bfbmi, lbmi, dbmi,val = calBmi(int(w), int(h))
     
-    print ('\n SUGGESTED BREAKFAST ITEMS :: \n')
-    print((bf_df.loc[bf_df['label']==bfbmi]['Food_items']).to_string(index= False))
-    print ('\n SUGGESTED LUNCH ITEMS :: \n')
-    print((l_df.loc[l_df['label']==lbmi]['Food_items']).to_string(index= False))
-    print ('\n SUGGESTED DINNER ITEMS :: \n')
-    print((d_df.loc[d_df['label']==dbmi]['Food_items']).to_string(index= False))
-    
+    # print ('\n SUGGESTED BREAKFAST ITEMS :: \n')
+    breakfast_list = (bf_df.loc[bf_df['label']==bfbmi]['Food_items']).to_string(index= False)
+    breakfast_list = [item.strip() for item in breakfast_list.split('\n')]    
+    # print(breakfast_list)
+    # print ('\n SUGGESTED LUNCH ITEMS :: \n')
+    lunch_list = (l_df.loc[l_df['label']==lbmi]['Food_items']).to_string(index= False)
+    lunch_list = [item.strip() for item in lunch_list.split('\n')]
+    # print(lunch_list)
+    # print ('\n SUGGESTED DINNER ITEMS :: \n')
+    dinner_list = (d_df.loc[d_df['label']==dbmi]['Food_items']).to_string(index= False)
+    dinner_list=[item.strip() for item in dinner_list.split('\n')]
+    # print(dinner_list)
+    return breakfast_list, lunch_list, dinner_list, val
 
 weight = 80
 height = 169
