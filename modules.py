@@ -184,6 +184,6 @@ def recommend(w, h):
     # print(dinner_list)
     return breakfast_list, lunch_list, dinner_list, val
 
-weight = 80
-height = 169
-recommend(weight, height)
+# weight = 80
+# height = 169
+# recommend(weight, height)
