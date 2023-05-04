@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{%block active2%}active{%endblock%}
+
+{% block content %}
+
+
+<div class="container my-5">
+    <div class="text-center h-100 fw-bold my-5">Your BMI is : {{bmi}}</div>
+    <div class="text-center h-100 my-2">Height: {{height}} Weight:{{weight}}</div>
+    {% for j,val in item.items() %}
+    <div class="text-center h-75 fw-bold my-5">{{j}}</div>
+    <div class="row">
+      {% for i in val %}
+      <div class="col-md-3 my-4">
+        <div class="card" style="width: 18rem">
+          <img
+            src="https://source.unsplash.com/random/3840×2160/?{{i}}"
+            class="card-img-top"
+            height="200px"
+            alt="..." />
+          <div class="card-body">
+            <p class="card-text">{{i}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {%endfor%}
+  </div>
+
+
+{% endblock %}
