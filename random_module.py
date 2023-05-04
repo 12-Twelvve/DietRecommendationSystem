@@ -12,7 +12,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-food_data = pd.read_csv('data/food_new.csv')
+food_data = pd.read_csv('data/food_v1.csv')
 
 X = food_data.drop('Food_items', axis=1)
 y = food_data['Food_items']
@@ -124,5 +124,5 @@ def main_fun(height, weight):
     return all_recommended_items
         
 
-
+# print(main_fun(168,70))
 

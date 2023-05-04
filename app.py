@@ -21,8 +21,9 @@ def method1():
         weight = float(request.form['weight'])
         height=float(request.form["height"])
         food_items = rm.main_fun(height,weight)
-        print(food_items)
-        return render_template("method2.html",item=food_items)
+        # print(food_items)
+        bmi=float(float(weight)/(float(height/100.0))**2)
+        return render_template("method2.html",item=food_items,height=height,weight=weight,bmi=bmi)
 
 
 if __name__ == "__main__":
